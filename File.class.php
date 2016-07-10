@@ -19,7 +19,7 @@ class File extends Storage
      */
     public function appendFile($fileName , $content ,$type="")
     {
-       return  !$this->contents[$fileName]&&is_file($fileName) ? $this->putFile($fileName, $this->readFile($fileName).$content , $type) :die("已存在该文件");
+       return  !$this->contents[$fileName]&&is_file($fileName) ? $this->putFile($fileName, $this->readFile($fileName).$content , $type) :getError("已存在该文件:".$f);
     }
     /**
      *删除文件 
@@ -65,7 +65,7 @@ class File extends Storage
         $dir = dirname($fileName);
      
         !is_dir($dir) ? mkdir($dir , 0755 , true) : false;
-        return false === file_put_contents($fileName, $contents) ? die("写入错误") : $this->contents[$fileName] = $contents;
+        return false === file_put_contents($fileName, $contents) ? getError("写入错误:".$fileName) : $this->contents[$fileName] = $contents;
     }
     /**
      *加载文件 
