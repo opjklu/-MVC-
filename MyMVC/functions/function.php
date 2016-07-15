@@ -343,3 +343,62 @@ function showData($data , $isDie = false)
         }
      }
  }
+ 
+ /**
+  *检测值是否为空
+  *@param array $array         要检测的数组
+  *@param array $notCheck      不需要检测的键
+  *@param int   $isCheckNumber 是否检测数字
+  *@return bool
+  */
+ function isCheckData(array &$array , array $notCheck=null, $isCheckNumber = false)
+ {
+     if ( empty($array) )
+     {
+         return false;
+     }
+     else
+     {
+         $flag = 0;
+         foreach ($array as $key => &$value)
+         {
+             if (!empty($not_key) && in_array($key, $notCheck))
+             {
+                 $flag +=1;
+                 continue;
+             }
+             if ($value ==='0' || $value === 0)
+             {
+                 $flag = 0;
+                 $flag +=1;
+                 continue;
+             }
+             if (is_array($value))
+             {
+                 isCheckData($value , $not_key, $isCheckNumber);
+             }
+             else
+             {
+                 $value = addslashes($value);
+                  
+                 if ($isCheckNumber === true && !is_numeric($value))
+                 {
+                     return  false;
+                 }
+                 if (empty($value))
+                 {
+                     return  false;
+                 }
+                 else
+                 {
+                     $flag++;
+                 }
+             }
+         }
+         if ($flag > 0)
+         {
+             return true;
+         }
+     }
+ }
+ 

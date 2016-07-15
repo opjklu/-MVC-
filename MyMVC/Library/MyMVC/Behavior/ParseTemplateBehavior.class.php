@@ -76,8 +76,6 @@ class ParseTemplateBehavior
      */
     protected function checkCacheContent($content, $perfix=null)
     {
-       
         return  Storage::hasFile(getConfig('APP_CACHE_PATH').$perfix.md5($content).getConfig('TMPL_CACHFILE_SUFFIX')) ? true : false;
-        
     }
 }
