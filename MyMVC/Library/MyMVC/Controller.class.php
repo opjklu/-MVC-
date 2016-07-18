@@ -32,6 +32,32 @@ abstract class Controller
         
     }
     /**
+     *输出模板内容 
+     *@param string $tempateFile 模板文件名称
+     *@param string $content     模板内容
+     *@param string $charset     字符编码
+     *@param string $contentType 输出类型
+     *@param string $suffix      缓存前缀
+     *@return html
+     */
+    public function display($tempateFile = null, $content=null, $charset = 'UTF-8', $contentType = 'text/html', $suffix = null)
+    {
+        return $this->view->display($tempateFile, $content, $charset, $contentType, $suffix);
+    }
+    
+    /**
+     *输出自定义内容
+     *@param string $content     模板内容
+     *@param string $charset     字符编码
+     *@param string $contentType 输出类型
+     *@param string $suffix      缓存前缀
+     *@return html
+     */
+    public function userShowContent($content=null, $charset = 'UTF-8', $contentType = 'text/html', $suffix = null)
+    {
+        return $this->view->display('', $content, $charset, $contentType, $suffix);
+    }
+    /**
      *魔术方法
      *@param string $methods 方法名
      *@param string | array $args 参数 
@@ -55,7 +81,7 @@ abstract class Controller
         }
         else 
         {
-            getError(__CLASS__.':'.getLanage('_METHOD_NOT_EXIST_'));
+            getError(__CLASS__.':'.$methods.getLanage('_METHOD_NOT_EXIST_'));
             return ;
         }
         

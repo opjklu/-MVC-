@@ -47,4 +47,5 @@ return array(
     '_RECORD_HAS_UPDATE_'    => '记录已经更新',
     '_NOT_ALLOW_PHP_'        => '模板禁用PHP代码',
     '_PARAM_ERROR_'          => '参数错误或者未定义',
+    '_FILE_NOT_EXITS'        => '文件不存在'
 );

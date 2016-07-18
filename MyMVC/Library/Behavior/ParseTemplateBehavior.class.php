@@ -16,6 +16,7 @@ class ParseTemplateBehavior
     {
         $engine       = strtolower(getConfig('TMPL_ENGINE_TYPE')); //模板引擎
         $templateFile = empty($param['file'])   ? $param['content'] : $param['file'];
+      
         $perfix       = empty($param['perfix']) ? $param['perfix']  : getConfig('TMPL_CACHE_PREFIX');
         if ('mymvc' == $engine) {
             //判断缓存是否有效
@@ -24,6 +25,7 @@ class ParseTemplateBehavior
             } else {
                 //编译文件
                 $templateObj = MyMVC\MyMVC::getIntrance('MyMVC\\Template');
+               
                 $parseFile   = $templateObj->parseTemplateFile($templateFile , $param['var'] , $perfix);
             }
         } else {
@@ -76,6 +78,8 @@ class ParseTemplateBehavior
      */
     protected function checkCacheContent($content, $perfix=null)
     {
+       
         return  Storage::hasFile(getConfig('APP_CACHE_PATH').$perfix.md5($content).getConfig('TMPL_CACHFILE_SUFFIX')) ? true : false;
+        
     }
 }

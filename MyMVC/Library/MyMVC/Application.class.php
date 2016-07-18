@@ -79,9 +79,10 @@ class  Application
                                     getError(getLanage('_PARAM_ERROR_').$paramName);
                                 }
                             }
-                            $method->invoke($model , $value);
-                        }else {
-                            $method->invoke($model);
+                            $method->invoke($class->newInstance(null) , $value);
+                        }else { 
+                           
+                            $method->invoke($class->newInstance(null));
                         }
                         //后置操作
                         if($class->hasMethod('__front__'.$action))  {

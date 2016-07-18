@@ -54,7 +54,7 @@ return array(
             'Behavior\ContentReplaceBehavior', // 模板输出替换
         ),
         'view_filter'   =>  array(
-            'Behavior\WriteHtmlCacheBehavior', // 写入静态缓存
+            'Behavior\WriterStaticHTMLCacheBehavior', // 写入静态缓存
         ),
     )
 );

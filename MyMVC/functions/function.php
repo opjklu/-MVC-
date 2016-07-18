@@ -344,61 +344,47 @@ function showData($data , $isDie = false)
      }
  }
  
- /**
-  *检测值是否为空
-  *@param array $array         要检测的数组
-  *@param array $notCheck      不需要检测的键
-  *@param int   $isCheckNumber 是否检测数字
-  *@return bool
-  */
- function isCheckData(array &$array , array $notCheck=null, $isCheckNumber = false)
+/**
+ * 获取模版文件 格式 资源://模块@主题/控制器/操作
+ * @param string $name 模版资源地址
+ * @param string $layer 视图层（目录）名称
+ * @return string
+ */
+ function loadTemplateFile($template=null, $layer=null)
  {
-     if ( empty($array) )
-     {
-         return false;
+     // 解析模版资源地址
+     if(false === strpos($template,'://')){
+         $template   =   'http://'.str_replace(':', '/',$template);
      }
-     else
-     {
-         $flag = 0;
-         foreach ($array as $key => &$value)
-         {
-             if (!empty($not_key) && in_array($key, $notCheck))
-             {
-                 $flag +=1;
-                 continue;
-             }
-             if ($value ==='0' || $value === 0)
-             {
-                 $flag = 0;
-                 $flag +=1;
-                 continue;
-             }
-             if (is_array($value))
-             {
-                 isCheckData($value , $not_key, $isCheckNumber);
-             }
-             else
-             {
-                 $value = addslashes($value);
-                  
-                 if ($isCheckNumber === true && !is_numeric($value))
-                 {
-                     return  false;
-                 }
-                 if (empty($value))
-                 {
-                     return  false;
-                 }
-                 else
-                 {
-                     $flag++;
-                 }
-             }
-         }
-         if ($flag > 0)
-         {
-             return true;
-         }
-     }
- }
+     $info   =   parse_url($template);
+     $file   =   $info['host'].(isset($info['path'])?$info['path']:'');
+     $module =   isset($info['user'])?$info['user'].'/':__MODULE__.'/';
+     $extend =   $info['scheme'];
+     $layer  =   $layer?$layer:getConfig('DEFAULT_V_LAYER');
  
+     // 获取当前主题的模版路径
+     if($view_path = getConfig('VIEW_PATH')){ // 指定视图目录
+         $baseUrl    =   $view_path.$module.'/';
+     }else{
+         $baseUrl    =   APP_PATH.$module.$layer.'/';
+     }
+ 
+     // 获取主题
+     $theme  =   substr_count($file,'/')<2 ? getConfig('DEFAULT_THEME') : '';
+ 
+     // 分析模板文件规则
+     $depr   =   getConfig('TMPL_FILE_DEPR');
+     if('' == $file) {
+         // 如果模板文件名为空 按照默认规则定位
+         $file = __CONTROLLER__ . $depr . __ACTION__;
+     }elseif(false === strpos($file, '/')){
+         $file = __CONTROLLER__ . $depr . $file;
+     }elseif('/' != $depr){
+         if(substr_count($file,'/')>1){
+             $file   =   substr_replace($file,$depr,strrpos($file,'/'),1);
+         }else{
+             $file   =   str_replace('/', $depr, $file);
+         }
+     }
+     return $baseUrl.($theme?$theme.'/':'').$file.getConfig('TMPL_TEMPLATE_SUFFIX');
+ }

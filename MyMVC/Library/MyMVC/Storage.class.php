@@ -26,6 +26,6 @@ class Storage
      */
     public static function __callstatic($method , $args) 
     {
-        return  method_exists(self::$handel, $method) ? call_user_func_array(array(self::$handel , $method), $args) :die("没有该方法");
+        return  method_exists(self::$handel, $method) ? call_user_func_array(array(self::$handel , $method), $args) :getError(getLanage('_METHOD_NOT_EXIST_').':'.$method);
     }
 }

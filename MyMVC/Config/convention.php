@@ -1,9 +1,9 @@
 <?php
 use MyMVC\MyMVC;
 // +----------------------------------------------------------------------
-// | ThinkPHP [ WE CAN DO IT JUST THINK IT ]
+// | MyMVCPHP [ WE CAN DO IT JUST MyMVC IT ]
 // +----------------------------------------------------------------------
-// | Copyright (c) 2006-2013 http://thinkphp.cn All rights reserved.
+// | Copyright (c) 2006-2013 http://MyMVCphp.cn All rights reserved.
 // +----------------------------------------------------------------------
 // | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
 // +----------------------------------------------------------------------
@@ -106,12 +106,12 @@ return  array(
     'TMPL_CONTENT_TYPE'     =>  'text/html', // 默认模板输出类型
     'TMPL_ACTION_ERROR'     =>  MyMVC_PATH.'Tpl/dispatch_jump.tpl', // 默认错误跳转对应的模板文件
     'TMPL_ACTION_SUCCESS'   =>  MyMVC_PATH.'Tpl/dispatch_jump.tpl', // 默认成功跳转对应的模板文件
-    'TMPL_EXCEPTION_FILE'   =>  MyMVC_PATH.'Tpl/think_exception.tpl',// 异常页面的模板文件
+    'TMPL_EXCEPTION_FILE'   =>  MyMVC_PATH.'Tpl/MyMVC_exception.tpl',// 异常页面的模板文件
     'TMPL_DETECT_THEME'     =>  false,       // 自动侦测模板主题
     'TMPL_TEMPLATE_SUFFIX'  =>  '.html',     // 默认模板文件后缀
     'TMPL_FILE_DEPR'        =>  '/', //模板文件CONTROLLER_NAME与ACTION_NAME之间的分割符
     // 布局设置
-    'TMPL_ENGINE_TYPE'      =>  'Think',     // 默认模板引擎 以下设置仅对使用Think模板引擎有效
+    'TMPL_ENGINE_TYPE'      =>  'MyMVC',     // 默认模板引擎 以下设置仅对使用MyMVC模板引擎有效
     'TMPL_CACHFILE_SUFFIX'  =>  '.php',      // 默认模板缓存后缀
     'TMPL_DENY_FUNC_LIST'   =>  'echo,exit',    // 模板引擎禁用函数
     'TMPL_DENY_PHP'         =>  false, // 默认模板引擎是否禁用PHP原生代码
@@ -126,7 +126,7 @@ return  array(
     'LAYOUT_ON'             =>  false, // 是否启用布局
     'LAYOUT_NAME'           =>  'layout', // 当前布局名称 默认为layout
 
-    // Think模板引擎标签库相关设定
+    // MyMVC模板引擎标签库相关设定
     'TAGLIB_BEGIN'          =>  '<',  // 标签库标签开始标记
     'TAGLIB_END'            =>  '>',  // 标签库标签结束标记
     'TAGLIB_LOAD'           =>  true, // 是否使用内置标签库之外的其它标签库，默认自动检测

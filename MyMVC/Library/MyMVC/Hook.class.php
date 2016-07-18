@@ -71,7 +71,7 @@ class Hook
                getMemory($tag."Start");//获取内存及运行时间
                getTrace("[{$tag}]--start--" , '' , 'INFO');//获取调试信息
            }
-           foreach (self::$tags as $name){
+           foreach (self::$tags[$tag] as $name){
                APP_DEBUG&&getMemory($name."_start");
                //执行插件
                $result = self::exec($name ,$tag ,  $param);
