@@ -42,7 +42,7 @@ class Model
                 $flag = 1;
             }
         }
-        if ($flag === 0 && !empty($data[$this->primary]))//插入
+        if ($flag === 0 && !empty($data[$this->db->primary]))//插入
         {
             unset($data[$this->primary]);
         }
